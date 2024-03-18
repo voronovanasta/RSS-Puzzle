@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd rss-puzzle
+# validate branch name before commit
+npm run fix
+npx validate-branch-name 
+
