@@ -4,7 +4,8 @@
     "extends": [
         "airbnb-base",
         "prettier",
-        "eslint:recommended",        
+        "eslint:recommended",
+        "plugin:import/typescript",        
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/eslint-recommended"
     ],
@@ -18,7 +19,21 @@
         "no-console": 0,
         "class-methods-use-this": "off",
         "@typescript-eslint/no-explicit-any": 2,
-        "prettier/prettier": "error"
-    }
-  
+        "prettier/prettier": [
+            "error",
+            {
+              "endOfLine": "auto"
+            }
+          ],
+          "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+         ]
+    } 
 }
