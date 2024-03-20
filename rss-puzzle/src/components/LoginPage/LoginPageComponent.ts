@@ -1,18 +1,21 @@
-const LoginPageComponent = () => `<div id="login" class="login">
+const LoginPageComponent = () => `<div class="login-wrapper">
     <h1>Puzzle</h1><h3>Registration</h3>
     <form id="login-form" class="login-form">
        <div class="item">
-           <label for="name">Name</label>
-           <input id="name" class="input-login" name="name" type="text" autocomplete="on" required>
+           <label for="name"></label>
+           <input id="name" class="input-login" name="name" type="text" autocomplete="on" placeholder = "Name" required>
+        </div>
+        <div id="nameMessage" class="login-form-error">
+            <div id="errorNameMessage" class="errorlabel"></div>
         </div>
         <div class="item">
-            <label for="surname">Surname</label>
-            <input id="surname" class="input-login" name="surname" type="text" autocomplete="on" required>
+            <label for="surname"></label>
+            <input id="surname" class="input-login" name="surname" type="text" autocomplete="on" placeholder = "Surname" required>
         </div>
-        <div id="loginMessage" class="login-form-error">
-            <div id="errorLoginMessage" class="errorlabel"></div>
+        <div id="surnameMessage" class="login-form-error">
+            <div id="errorSurnameMessage" class="errorlabel"></div>
         </div>
-        <button class="button" id="btnLogin" type="button">Log in</button>
+        <a href="/start" class="button loginBtn target-link" id = "login">Log in</a>
     </form>
 </div>`;
 

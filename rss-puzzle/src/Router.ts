@@ -1,5 +1,8 @@
 import { RouterOptions } from "./types/RouterOptions";
 import LoginPageComponent from "./components/LoginPage/LoginPageComponent";
+import LoginPageController from "./pages/LoginPage/LoginPageController";
+import LoginPageModel from "./pages/LoginPage/LoginPageModel";
+import LoginPageView from "./pages/LoginPage/LoginPageView";
 
 export default class Router {
   private routes: RouterOptions;
@@ -33,17 +36,21 @@ export default class Router {
       console.log("launch");
       this.launchLogin();
     }
-    // this.setActiveLink(path);
+    this.setActiveLink(path);
   }
 
-  // setActiveLink(path: string = "/") {
-  //   document.querySelectorAll(".menu__link").forEach((link: Element) => {
-  //     link.classList.toggle("active", path === link.href);
-  //   });
-  // }
+  setActiveLink(path: string = "/") {
+    document.querySelectorAll(".router-link").forEach((el: Element) => {
+      const link = el as HTMLAnchorElement;
+      link.classList.toggle("active", path === link.href);
+    });
+  }
 
   launchLogin() {
-    console.log(this.container);
     this.container.innerHTML = LoginPageComponent();
+    const loginView = new LoginPageView(this.container);
+    const loginModel = new LoginPageModel(loginView);
+    const loginController = new LoginPageController(this.container, loginModel);
+    loginController.init();
   }
 }
