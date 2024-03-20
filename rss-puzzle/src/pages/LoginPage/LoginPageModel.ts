@@ -11,7 +11,10 @@ export default class LoginPageModel {
   }
 
   updateData() {
-    localStorage.setItem("user", JSON.stringify(this.data));
+    if (this.data.name && this.data.surname) {
+      console.log(this.data);
+      localStorage.setItem("user", JSON.stringify(this.data));
+    }
   }
 
   updateName(name: string) {

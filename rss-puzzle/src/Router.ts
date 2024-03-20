@@ -18,7 +18,7 @@ export default class Router {
   init() {
     this.routes = {
       "/": () => this.launchLogin(),
-      // "/start": this.launchStart,
+      "/start": this.launchStart,
       // "/game": this.launchGame,
       // "/statistics": this.launchStats
     };
@@ -27,24 +27,22 @@ export default class Router {
   }
 
   render() {
+    console.log("router launches");
     const path = window.location.pathname;
     if (this.routes[path]) {
-      console.log(this.routes[path]);
-      console.log(this.routes[path]());
       this.routes[path]();
     } else {
-      console.log("launch");
       this.launchLogin();
     }
-    this.setActiveLink(path);
+    // this.setActiveLink(path);
   }
 
-  setActiveLink(path: string = "/") {
-    document.querySelectorAll(".router-link").forEach((el: Element) => {
-      const link = el as HTMLAnchorElement;
-      link.classList.toggle("active", path === link.href);
-    });
-  }
+  // setActiveLink(path: string = "/") {
+  //   document.querySelectorAll(".router-link").forEach((el: Element) => {
+  //     const link = el as HTMLAnchorElement;
+  //     link.classList.toggle("active", path === link.href);
+  //   });
+  // }
 
   launchLogin() {
     this.container.innerHTML = LoginPageComponent();
@@ -52,5 +50,9 @@ export default class Router {
     const loginModel = new LoginPageModel(loginView);
     const loginController = new LoginPageController(this.container, loginModel);
     loginController.init();
+  }
+
+  launchStart() {
+    console.log("start new start page");
   }
 }

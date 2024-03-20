@@ -25,6 +25,7 @@ export default class LoginPageController {
 
   init() {
     this.inputHandler();
+    this.loginHandler();
   }
 
   inputHandler() {
@@ -48,6 +49,17 @@ export default class LoginPageController {
           break;
         default:
           break;
+      }
+    });
+  }
+
+  loginHandler() {
+    const link = checkedQuerySelector(this.container, "#login");
+    link.addEventListener("click", (e) => {
+      if (e.target === null) throw new Error("target equals null");
+      const button: HTMLElement = e.target as HTMLElement;
+      if (button.id === "login") {
+        this.model.updateData();
       }
     });
   }
