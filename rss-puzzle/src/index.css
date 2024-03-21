@@ -170,5 +170,18 @@ h1 {
   text-align: center;
 }
 
+@keyframes text {
+  0% {
+    transform: translateY(-40px) rotate(180deg);
+    opacity: .5;
+  }
+}
+
+.greeting {
+  font-weight: 600;
+  color:blueviolet;
+  animation: .3s 0s 1 text normal both running linear;
+
+}
 
 

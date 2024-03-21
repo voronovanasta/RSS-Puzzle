@@ -6,6 +6,7 @@ import LoginPageView from "./pages/LoginPage/LoginPageView";
 import StartPageComponent from "./components/StartPage/StartPageComponent";
 import GamePageComponent from "./components/GamePage/GamePageComponent";
 import logoutHandler from "./utils/logoutHandler";
+import showGreeting from "./utils/showGreeting";
 
 export default class Router {
   private routes: RouterOptions;
@@ -53,6 +54,7 @@ export default class Router {
   launchStart() {
     this.container.innerHTML = StartPageComponent();
     logoutHandler();
+    showGreeting();
   }
 
   launchGame() {
