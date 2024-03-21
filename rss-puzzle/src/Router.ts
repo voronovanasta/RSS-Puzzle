@@ -19,7 +19,6 @@ export default class Router {
   }
 
   init() {
-    console.log("init router");
     this.routes = {
       "/": () => this.launchLogin(),
       "/start": () => this.launchStart(),
