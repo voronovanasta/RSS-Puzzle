@@ -6,9 +6,9 @@ export default class LoginPageController {
 
   private model: LoginPageModel;
 
-  private nameErrorContainer: Element;
+  private nameErrorContainer: Element | null;
 
-  private surnameErrorContainer: Element;
+  private surnameErrorContainer: Element | null;
 
   constructor(container: HTMLElement, loginModel: LoginPageModel) {
     this.container = container;
@@ -35,17 +35,21 @@ export default class LoginPageController {
 
       switch (input.id) {
         case "name":
-          this.nameErrorContainer.innerHTML = "";
-          if (this.model.validateInput(input.id, input.value)) {
-            this.model.updateName(input.value);
+          if (this.nameErrorContainer !== null) {
+            this.nameErrorContainer.innerHTML = "";
+            if (this.model.validateInput(input.id, input.value)) {
+              this.model.updateName(input.value);
+            }
           }
-
           break;
         case "surname":
-          this.surnameErrorContainer.innerHTML = "";
-          if (this.model.validateInput(input.id, input.value)) {
-            this.model.updateSurname(input.value);
+          if (this.surnameErrorContainer !== null) {
+            this.surnameErrorContainer.innerHTML = "";
+            if (this.model.validateInput(input.id, input.value)) {
+              this.model.updateSurname(input.value);
+            }
           }
+
           break;
         default:
           break;
@@ -55,7 +59,7 @@ export default class LoginPageController {
 
   loginHandler() {
     const link = checkedQuerySelector(this.container, "#login");
-    link.addEventListener("click", (e) => {
+    link?.addEventListener("click", (e) => {
       if (e.target === null) throw new Error("target equals null");
       const button: HTMLElement = e.target as HTMLElement;
       if (button.id === "login") {

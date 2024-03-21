@@ -1,9 +1,9 @@
 import checkedQuerySelector from "../../types/checkedQuerySelector";
 
 export default class LoginPageView {
-  private nameErrorContainer: Element;
+  private nameErrorContainer: Element | null;
 
-  private surnameErrorContainer: Element;
+  private surnameErrorContainer: Element | null;
 
   private container: HTMLElement;
 
@@ -21,14 +21,14 @@ export default class LoginPageView {
 
   appendErrorMsg(msg: Node, id: string) {
     if (id === "name") {
-      this.nameErrorContainer.append(msg);
+      this.nameErrorContainer?.append(msg);
     } else {
-      this.surnameErrorContainer.append(msg);
+      this.surnameErrorContainer?.append(msg);
     }
   }
 
   updateLoginBtn() {
     const loginBtn = checkedQuerySelector(this.container, "#login");
-    loginBtn.classList.add("login-active");
+    loginBtn?.classList.add("login-active");
   }
 }

@@ -3,6 +3,9 @@ import LoginPageComponent from "./components/LoginPage/LoginPageComponent";
 import LoginPageController from "./pages/LoginPage/LoginPageController";
 import LoginPageModel from "./pages/LoginPage/LoginPageModel";
 import LoginPageView from "./pages/LoginPage/LoginPageView";
+import StartPageComponent from "./components/StartPage/StartPageComponent";
+import GamePageComponent from "./components/GamePage/GamePageComponent";
+import logoutHandler from "./utils/logoutHandler";
 
 export default class Router {
   private routes: RouterOptions;
@@ -11,15 +14,15 @@ export default class Router {
 
   constructor(container: HTMLElement) {
     this.container = container;
-    console.log(this.container);
     this.routes = {};
   }
 
   init() {
+    console.log("init router");
     this.routes = {
       "/": () => this.launchLogin(),
-      "/start": this.launchStart,
-      // "/game": this.launchGame,
+      "/start": () => this.launchStart(),
+      "/game": () => this.launchGame(),
       // "/statistics": this.launchStats
     };
     window.addEventListener("popstate", () => this.render());
@@ -27,22 +30,17 @@ export default class Router {
   }
 
   render() {
-    console.log("router launches");
     const path = window.location.pathname;
-    if (this.routes[path]) {
-      this.routes[path]();
+    if (this.routes[path] && this.isLoggedUser()) {
+      if (path === "/") {
+        this.launchStart();
+      } else {
+        this.routes[path]();
+      }
     } else {
       this.launchLogin();
     }
-    // this.setActiveLink(path);
   }
-
-  // setActiveLink(path: string = "/") {
-  //   document.querySelectorAll(".router-link").forEach((el: Element) => {
-  //     const link = el as HTMLAnchorElement;
-  //     link.classList.toggle("active", path === link.href);
-  //   });
-  // }
 
   launchLogin() {
     this.container.innerHTML = LoginPageComponent();
@@ -53,6 +51,16 @@ export default class Router {
   }
 
   launchStart() {
-    console.log("start new start page");
+    this.container.innerHTML = StartPageComponent();
+    logoutHandler();
+  }
+
+  launchGame() {
+    this.container.innerHTML = GamePageComponent();
+    logoutHandler();
+  }
+
+  isLoggedUser() {
+    return localStorage.getItem("user") !== null;
   }
 }
